@@ -18,10 +18,8 @@ namespace AreaCalculator.Calculation.Solvers
                     if(convexPolygon != infrastructureObject)
                     {
                         var intersection = ShapeHelper.FindShapesIntersection(convexPolygon, infrastructureObject);
-                        if (!intersections.Contains(intersection))
-                        {
-                            intersections.Add(intersection);
-                        }
+                        
+                        intersections.Add(intersection);
                     }
                 }
             }

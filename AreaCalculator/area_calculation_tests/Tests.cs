@@ -36,9 +36,9 @@ namespace AreaCalculator.Calculation.Tests
             Assert.Equal(0, firstLine.B);
             Assert.Equal(-1, firstLine.C);
 
-            Assert.Equal(1, firstLine.A);
-            Assert.Equal(0, firstLine.B);
-            Assert.Equal(1, firstLine.C);
+            Assert.Equal(1, secondLine.A);
+            Assert.Equal(0, secondLine.B);
+            Assert.Equal(1, secondLine.C);
         }
 
         [Fact]

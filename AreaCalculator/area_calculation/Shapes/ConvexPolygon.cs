@@ -23,7 +23,7 @@ namespace AreaCalculator.Calculation.Shapes
 
             Points = Enumerable.Concat(new [] { leftPoint }, sorted).ToArray();
 
-            Area = CalculateSquare();
+            Area = CalculateArea();
             BorderSegments = InitBorderLines();
         }
 
@@ -78,13 +78,15 @@ namespace AreaCalculator.Calculation.Shapes
         #region Private methods
 
         /// <summary>
-        ///     Base implementation
+        ///     Simplest implementation of area calculation from wikipedia
         /// </summary>
-        private double CalculateSquare()
+        private double CalculateArea()
         {
             double square = 0;
 
             var firstPoint = Points.First();
+
+            // shape must have start at (0, 0), i.e. one of its points has to be there
             var normalizedPoints = Points.Select(p => p - new Vector(firstPoint)).ToArray();
 
             for (int i = 1; i < normalizedPoints.Length; i++)
