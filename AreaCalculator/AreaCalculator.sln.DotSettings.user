@@ -12,5 +12,6 @@
     &lt;TestId&gt;xUnit::6D0B4AC5-B170-44AE-BA65-939638409B5F::.NETCoreApp,Version=v3.1::AreaCalculator.Calculation.Tests.Tests.TestSegmentCreation&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::6D0B4AC5-B170-44AE-BA65-939638409B5F::.NETCoreApp,Version=v3.1::AreaCalculator.Calculation.Tests.Tests.TestBodrerLinesEvalueation&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::6D0B4AC5-B170-44AE-BA65-939638409B5F::.NETCoreApp,Version=v3.1::AreaCalculator.Calculation.Tests.Tests.TestFindingShapesIntersection&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::6D0B4AC5-B170-44AE-BA65-939638409B5F::.NETCoreApp,Version=v3.1::AreaCalculator.Calculation.Tests.Tests.TestSimpleAreaEvaluation&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

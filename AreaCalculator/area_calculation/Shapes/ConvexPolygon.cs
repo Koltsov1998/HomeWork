@@ -61,6 +61,18 @@ namespace AreaCalculator.Calculation.Shapes
             return result;
         }
 
+        public override int GetHashCode()
+        {
+            var result = Points.Average(p => (p.X + p.Y)).GetHashCode();
+
+            return result;
+        }
+
+        public override bool Equals(object obj)
+        {
+            return this.GetHashCode() == obj.GetHashCode();
+        }
+
         #endregion
 
         #region Private methods

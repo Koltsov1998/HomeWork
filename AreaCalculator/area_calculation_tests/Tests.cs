@@ -108,7 +108,7 @@ namespace AreaCalculator.Calculation.Tests
 
             var area = solver.CalculateInfrastructureArea(new[] {shape1, shape2});
 
-            Assert.Equal(1, area);
+            Assert.Equal(7, area);
         }
     }
 }
