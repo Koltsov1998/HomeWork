@@ -1,52 +1,57 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using AreaCalculator.Calculation.Lines;
 using AreaCalculator.Calculation.Shapes;
 using AreaCalculator.Calculation.Solvers;
 
 namespace AreaCalculator.CLI
 {
-    public class InputProcessor
+    /// <summary>
+    ///     Abstract inputs processor. Allows to test whole app outside of console
+    /// </summary>
+    public class InputTextProcessor
     {
-        private readonly TextReader _reader;
-        private readonly TextWriter _writer;
+        private readonly TextReader _input;
+        private readonly TextWriter _output;
 
-        public InputProcessor(TextReader reader, TextWriter writer)
+        public InputTextProcessor(TextReader input, TextWriter output)
         {
-            _reader = reader;
-            _writer = writer;
+            _input = input;
+            _output = output;
         }
 
-        public void ProcessInpit()
+        public void ProcessInput()
         {
-            _writer.WriteLine("Specify count of boundary area vertices");
+            _output.WriteLine("Specify count of boundary area vertices");
 
-            var k = int.Parse(_reader.ReadLine());
+            var k = int.Parse(_input.ReadLine());
 
-            _writer.WriteLine("Specify coordinates of boundary area vertices in clockwise order");
+            _output.WriteLine("Specify coordinates of boundary area vertices in clockwise order");
 
-            var points = ParsePointsCoordinates(_reader.ReadLine());
+            var points = ParsePointsCoordinates(_input.ReadLine());
 
-            _writer.WriteLine("Specify count of linear objects");
+            _output.WriteLine("Specify count of linear objects");
 
-            var n = int.Parse(_reader.ReadLine());
+            var n = int.Parse(_input.ReadLine());
+
+            _output.WriteLine("Specify linear objects parameters");
 
             var linearObjects = ParseLinearObjects(n);
 
-            var area = ProcessInput(points, linearObjects);
+            var area = CalculateArea(points, linearObjects);
 
-            _writer.WriteLine("Area under linear objects");
-            _writer.WriteLine(area);
+            _output.WriteLine("Area under linear objects");
+            _output.WriteLine(area);
+
+            _output.Flush();
         }
 
-        private double ProcessInput(Point[] boundaryAreaVertices, LinearObject[] linearObjects)
+        private double CalculateArea(Point[] boundaryAreaVertices, LinearObject[] linearObjects)
         {
             var boundaryArea = ConvexPolygon.Create(boundaryAreaVertices);
 
-            var infrastructureObjects = linearObjects.Select(o => ShapeHelper.BuildThickLineRectangle(boundaryArea, o)).ToArray();
+            var infrastructureObjects = linearObjects.Select(o => PolygonHelper.BuildThickLineRectangle(boundaryArea, o)).ToArray();
 
             Solver solver = new Solver();
 
@@ -75,7 +80,7 @@ namespace AreaCalculator.CLI
 
             for (int i = 0; i < count; i++)
             {
-                var parametersString = _reader.ReadLine();
+                var parametersString = _input.ReadLine();
                 var parameters = parametersString.Split(" ").Select(double.Parse).ToArray();
                 result.Add(new LinearObject(parameters[0], parameters[1], parameters[2], parameters[3]));
             }

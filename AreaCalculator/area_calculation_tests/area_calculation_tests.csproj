@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\area_calculation\area_calculation.csproj" />
+    <ProjectReference Include="..\area_calculator_cli\area_calculator_cli.csproj" />
   </ItemGroup>
 
 </Project>

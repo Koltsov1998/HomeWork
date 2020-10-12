@@ -37,10 +37,6 @@ namespace AreaCalculator.Calculation.Shapes
 
         #region Public methods
 
-        public Vector Normalize()
-        {
-            return this / Lenght;
-        }
 
         public static double operator *(Vector first, Vector second)
         {

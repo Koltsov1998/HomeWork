@@ -14,7 +14,6 @@ namespace AreaCalculator.Calculation.Tests
         public void TestPointedShapeEvaluation()
         {
             var shape = ConvexPolygon.Create(
-                new Point(0, 0),
                 new Point(0, 4),
                 new Point(4, 4),
                 new Point(6, 0),
@@ -82,7 +81,7 @@ namespace AreaCalculator.Calculation.Tests
                 new Point(3, 1)
             );
 
-            var intersectionShape = ShapeHelper.FindShapesIntersection(shape1, shape2);
+            var intersectionShape = PolygonHelper.FindShapesIntersection(shape1, shape2);
 
             Assert.Equal(1, intersectionShape.Area);
         }
@@ -104,7 +103,7 @@ namespace AreaCalculator.Calculation.Tests
                 new Point(4, 0)
             );
 
-            var intersectionShape = ShapeHelper.FindShapesIntersection(shape1, shape2);
+            var intersectionShape = PolygonHelper.FindShapesIntersection(shape1, shape2);
 
             Assert.Equal(null, intersectionShape);
         }
@@ -126,7 +125,7 @@ namespace AreaCalculator.Calculation.Tests
                 new Point(2, 0)
             );
 
-            var intersectionShape = ShapeHelper.FindShapesIntersection(shape1, shape2);
+            var intersectionShape = PolygonHelper.FindShapesIntersection(shape1, shape2);
 
             Assert.True(intersectionShape.Equals(shape1));
         }

@@ -1,10 +1,12 @@
-﻿using System;
-using AreaCalculator.Calculation.Shapes;
+﻿using AreaCalculator.Calculation.Shapes;
 using MathNet.Numerics.LinearAlgebra.Double;
 using Vector = MathNet.Numerics.LinearAlgebra.Double.Vector;
 
 namespace AreaCalculator.Calculation.Lines
 {
+    /// <summary>
+    ///     Utility functions to process lines
+    /// </summary>
     public static class LineHelper
     {
         public static Point FindLinesIntersection(Line firstLine, Line secondLine)

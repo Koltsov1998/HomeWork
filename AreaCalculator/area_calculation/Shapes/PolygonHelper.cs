@@ -4,7 +4,10 @@ using AreaCalculator.Calculation.Lines;
 
 namespace AreaCalculator.Calculation.Shapes
 {
-    public static class ShapeHelper
+    /// <summary>
+    ///     Utility functions to process polygon shapes
+    /// </summary>
+    public static class PolygonHelper
     {
         public static ConvexPolygon BuildThickLineRectangle(ConvexPolygon boundaryArea, LinearObject linearObject)
         {

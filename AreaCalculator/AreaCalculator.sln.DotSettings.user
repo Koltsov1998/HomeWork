@@ -1,20 +1,10 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=340acb82_002D2b82_002D4150_002Db9a3_002D8a157070b193/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="TestPointedShapeEvaluation" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
-  &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;xUnit::6D0B4AC5-B170-44AE-BA65-939638409B5F::.NETCoreApp,Version=v3.1::AreaCalculator.Calculation.Tests.Tests.TestPointedShapeEvaluation&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::6D0B4AC5-B170-44AE-BA65-939638409B5F::.NETCoreApp,Version=v3.1::AreaCalculator.Calculation.Tests.Tests.TestBodrerLinesEvalueation&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::6D0B4AC5-B170-44AE-BA65-939638409B5F::.NETCoreApp,Version=v3.1::AreaCalculator.Calculation.Tests.Tests.TestFindingLinesIntersection&lt;/TestId&gt;&#xD;
-  &lt;/TestAncestor&gt;&#xD;
-&lt;/SessionState&gt;</s:String>
+	
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=b250717b_002Dae5c_002D4cfa_002D82a7_002D283a2362d62c/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="TestFindingLinesIntersection" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;xUnit::6D0B4AC5-B170-44AE-BA65-939638409B5F::.NETCoreApp,Version=v3.1::AreaCalculator.Calculation.Tests.Tests.TestFindingLinesIntersection&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::6D0B4AC5-B170-44AE-BA65-939638409B5F::.NETCoreApp,Version=v3.1::AreaCalculator.Calculation.Tests.Tests.TestSegmentCreation&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::6D0B4AC5-B170-44AE-BA65-939638409B5F::.NETCoreApp,Version=v3.1::AreaCalculator.Calculation.Tests.Tests.TestBodrerLinesEvalueation&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::6D0B4AC5-B170-44AE-BA65-939638409B5F::.NETCoreApp,Version=v3.1::AreaCalculator.Calculation.Tests.Tests.TestFindingShapesIntersection&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::6D0B4AC5-B170-44AE-BA65-939638409B5F::.NETCoreApp,Version=v3.1::AreaCalculator.Calculation.Tests.Tests.TestSimpleAreaEvaluation&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::6D0B4AC5-B170-44AE-BA65-939638409B5F::.NETCoreApp,Version=v3.1::AreaCalculator.Calculation.Tests.Tests.TestComplexAreaEvaluation&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::6D0B4AC5-B170-44AE-BA65-939638409B5F::.NETCoreApp,Version=v3.1::AreaCalculator.Calculation.Tests.Tests.TestComplexAreaEvaluation2&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::6D0B4AC5-B170-44AE-BA65-939638409B5F::.NETCoreApp,Version=v3.1::AreaCalculator.Calculation.Tests.Tests.TestComplexAreaEvaluation3&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::6D0B4AC5-B170-44AE-BA65-939638409B5F::.NETCoreApp,Version=v3.1::AreaCalculator.Calculation.Tests.CommonTests.TestPointedShapeEvaluation&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::6D0B4AC5-B170-44AE-BA65-939638409B5F::.NETCoreApp,Version=v3.1::AreaCalculator.Calculation.Tests.SolutionTests.TestStreamInput&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::6D0B4AC5-B170-44AE-BA65-939638409B5F::.NETCoreApp,Version=v3.1::AreaCalculator.Calculation.Tests.SolutionTests.TestStreams&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::6D0B4AC5-B170-44AE-BA65-939638409B5F::.NETCoreApp,Version=v3.1::AreaCalculator.Calculation.Tests.SolutionTests.TestStreamInput2&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

@@ -6,9 +6,9 @@ namespace AreaCalculator.CLI
     {
         static void Main(string[] args)
         {
-            var inputProcessor = new InputProcessor(Console.In, Console.Out);
+            var inputProcessor = new InputTextProcessor(Console.In, Console.Out);
 
-            inputProcessor.ProcessInpit();
+            inputProcessor.ProcessInput();
         }
     }
 }

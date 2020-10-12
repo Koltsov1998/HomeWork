@@ -4,53 +4,66 @@ using AreaCalculator.Calculation.Shapes;
 
 namespace AreaCalculator.Calculation.Solvers
 {
+    /// <summary>
+    ///     My own heuristic implementation
+    /// </summary>
     public class Solver : ISolver
     {
-        private double _result = 0;
+        #region Implementation of ISolver
 
         public double CalculateInfrastructureArea(IEnumerable<ConvexPolygon> infrastructureObjects)
+        {
+            return CalculateInfrastructureArea(infrastructureObjects, 0);
+        }
+
+        #endregion
+
+        #region Private methods
+
+        private double CalculateInfrastructureArea(IEnumerable<ConvexPolygon> infrastructureObjects, double summaryArea)
         {
             if (!infrastructureObjects.Any())
             {
                 return 0;
             }
 
-            infrastructureObjects = Filter(infrastructureObjects).ToArray();
+            infrastructureObjects = Filter(infrastructureObjects);
 
-            HashSet<ConvexPolygon> intersectionsArea = new HashSet<ConvexPolygon>();
+            HashSet<ConvexPolygon> nextOrderInfrastructureObjects = new HashSet<ConvexPolygon>();
 
-            double sum = 0;
+            double pureAreaSum = 0;
 
-            foreach(var shape in infrastructureObjects)
+            // calculate area of polygons not covered by other polygons
+            foreach (var shape in infrastructureObjects)
             {
                 var areaWithoutIntersections = 0;
 
-                var otherShapes = infrastructureObjects.Except(new[] {shape}).ToArray();
-                var inters = otherShapes
-                    .Select(o => ShapeHelper.FindShapesIntersection(o, shape))
-                    .Where(i => i != null)
-                    .ToArray();
+                var inters = infrastructureObjects
+                    .Except(new[] { shape })
+                    .Select(o => PolygonHelper.FindShapesIntersection(o, shape))
+                    .Where(i => i != null);
 
-                HashSet<ConvexPolygon> intersections =new HashSet<ConvexPolygon>(inters);
+                HashSet<ConvexPolygon> intersections = new HashSet<ConvexPolygon>(inters);
 
                 var pureArea = shape.Area - GetSummaryAreaOfIntersections(intersections);
 
-                sum += pureArea;
+                pureAreaSum += pureArea;
 
-                foreach(var i in intersections)
+                // store intersected shapes to handle them in next recursion step
+                foreach (var i in intersections)
                 {
-                    intersectionsArea.Add(i);
+                    nextOrderInfrastructureObjects.Add(i);
                 }
             }
 
-            _result += sum + CalculateInfrastructureArea(intersectionsArea);
+            summaryArea += pureAreaSum + CalculateInfrastructureArea(nextOrderInfrastructureObjects, summaryArea);
 
-            return _result;
+            return summaryArea;
         }
 
-        public double GetSummaryAreaOfIntersections(IEnumerable<ConvexPolygon> intersections)
+        private double GetSummaryAreaOfIntersections(IEnumerable<ConvexPolygon> intersections)
         {
-            if(!intersections.Any())
+            if (!intersections.Any())
             {
                 return 0;
             }
@@ -63,7 +76,7 @@ namespace AreaCalculator.Calculation.Solvers
             return result;
         }
 
-        public IEnumerable<ConvexPolygon> GetIntersections(IEnumerable<ConvexPolygon> infrastructureObjects)
+        private IEnumerable<ConvexPolygon> GetIntersections(IEnumerable<ConvexPolygon> infrastructureObjects)
         {
             var intersections = new HashSet<ConvexPolygon>();
 
@@ -73,7 +86,7 @@ namespace AreaCalculator.Calculation.Solvers
                 {
                     if (convexPolygon != infrastructureObject)
                     {
-                        var intersection = ShapeHelper.FindShapesIntersection(convexPolygon, infrastructureObject);
+                        var intersection = PolygonHelper.FindShapesIntersection(convexPolygon, infrastructureObject);
 
                         intersections.Add(intersection);
                     }
@@ -83,11 +96,16 @@ namespace AreaCalculator.Calculation.Solvers
             return intersections.Where(i => i != null);
         }
 
-        public IEnumerable<ConvexPolygon> Filter(IEnumerable<ConvexPolygon> shapes)
+        /// <summary>
+        ///     Filter from shapes that are lying inside another shapes
+        /// </summary>
+        private IEnumerable<ConvexPolygon> Filter(IEnumerable<ConvexPolygon> shapes)
         {
-            var result = shapes.Where(s => !shapes.Except(new []{s}).Any(s.IsInsideAnotherCp));
+            var result = shapes.Where(s => !shapes.Except(new[] { s }).Any(s.IsInsideAnotherCp));
 
             return result;
         }
+
+        #endregion
     }
 }

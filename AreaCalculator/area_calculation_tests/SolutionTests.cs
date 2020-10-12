@@ -1,11 +1,16 @@
-﻿using AreaCalculator.Calculation.Shapes;
+﻿using System;
+using System.IO;
+using AreaCalculator.Calculation.Shapes;
 using AreaCalculator.Calculation.Solvers;
+using AreaCalculator.CLI;
 using Xunit;
 
 namespace AreaCalculator.Calculation.Tests
 {
     public class SolutionTests
     {
+        private const double _tol = 10e-1;
+
         [Fact]
         public void TestSimpleAreaEvaluation()
         {
@@ -31,7 +36,7 @@ namespace AreaCalculator.Calculation.Tests
         }
 
         [Fact]
-        public void TestComplexAreaEvaluation2()
+        public void TestComplexAreaEvaluation()
         {
             var shape1 = ConvexPolygon.Create(
                 new Point(0, 0),
@@ -58,12 +63,12 @@ namespace AreaCalculator.Calculation.Tests
             var solver = new Solver();
 
             var area = solver.CalculateInfrastructureArea(new[] { shape1, shape2, shape3 });
-
+            
             Assert.Equal(8, area);
         }
 
         [Fact]
-        public void TestComplexAreaEvaluation3()
+        public void TestComplexAreaEvaluation2()
         {
             var shape1 = ConvexPolygon.Create(
                 new Point(0, 0),
@@ -95,7 +100,7 @@ namespace AreaCalculator.Calculation.Tests
         }
 
         [Fact]
-        public void TestComplexAreaEvaluation()
+        public void TestComplexAreaEvaluation3()
         {
             var shape1 = ConvexPolygon.Create(
                 new Point(0, 0),
@@ -130,6 +135,83 @@ namespace AreaCalculator.Calculation.Tests
             var area = solver.CalculateInfrastructureArea(new[] { shape1, shape2, shape3, shape4 });
 
             Assert.Equal(9, area);
+        }
+
+        [Fact]
+        public void TestStreamInput()
+        {
+            var inputStream = new MemoryStream();
+            var outputStream = new MemoryStream();
+
+            StreamWriter inputWriter = new StreamWriter(inputStream);
+            StreamReader outputReader = new StreamReader(outputStream);
+
+            var streamReader = new StreamReader(inputStream);
+            var streamWriter = new StreamWriter(outputStream);
+
+            var inputProcessor = new InputTextProcessor(streamReader, streamWriter);
+
+            inputWriter.WriteLine("2");
+            inputWriter.WriteLine("0 0 0 10 10 10 10 0");
+            inputWriter.WriteLine("2");
+            inputWriter.WriteLine("1 0 1 -5");
+            inputWriter.WriteLine("1 1 0 -5");
+
+            inputWriter.Flush();
+
+            inputStream.Position = 0;
+
+            inputProcessor.ProcessInput();
+
+            outputStream.Position = 0;
+
+            outputReader.ReadLine();
+            outputReader.ReadLine();
+            outputReader.ReadLine();
+            outputReader.ReadLine();
+            outputReader.ReadLine();
+
+            var area = double.Parse(outputReader.ReadLine());
+            Assert.True(Math.Abs(19 - area) < _tol);
+        }
+
+        [Fact]
+        public void TestStreamInput2()
+        {
+            var inputStream = new MemoryStream();
+            var outputStream = new MemoryStream();
+
+            StreamWriter inputWriter = new StreamWriter(inputStream);
+            StreamReader outputReader = new StreamReader(outputStream);
+
+            var streamReader = new StreamReader(inputStream);
+            var streamWriter = new StreamWriter(outputStream);
+
+            var inputProcessor = new InputTextProcessor(streamReader, streamWriter);
+
+            inputWriter.WriteLine("2");
+            inputWriter.WriteLine("0 0 0 10 10 10 10 0");
+            inputWriter.WriteLine("3");
+            inputWriter.WriteLine("1 0 1 -5");
+            inputWriter.WriteLine("1 1 0 -5");
+            inputWriter.WriteLine("1 1 1 -10");
+
+            inputWriter.Flush();
+
+            inputStream.Position = 0;
+
+            inputProcessor.ProcessInput();
+
+            outputStream.Position = 0;
+
+            outputReader.ReadLine();
+            outputReader.ReadLine();
+            outputReader.ReadLine();
+            outputReader.ReadLine();
+            outputReader.ReadLine();
+
+            var area = double.Parse(outputReader.ReadLine());
+            Assert.True(Math.Abs(31.2 - area) < _tol);
         }
     }
 }

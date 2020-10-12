@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace AreaCalculator.Calculation.Shapes
+﻿namespace AreaCalculator.Calculation.Shapes
 {
     public class Point
     {
@@ -12,9 +8,15 @@ namespace AreaCalculator.Calculation.Shapes
             Y = y;
         }
 
+        #region Public properties
+
         public double X { get; }
 
         public double Y { get; }
+
+        #endregion
+
+        #region Public methods
 
         public static Point operator -(Point point, Vector vector)
         {
@@ -30,9 +32,11 @@ namespace AreaCalculator.Calculation.Shapes
         /// <inheritdoc />
         public override bool Equals(object obj)
         {
-            var other = (Point) obj;
+            var other = (Point)obj;
 
             return this.X == other.X && this.Y == other.Y;
         }
+
+        #endregion
     }
 }

@@ -9,21 +9,23 @@ namespace AreaCalculator.Calculation.Shapes
     {
         private const double tol = 10e-1;
 
+        #region Ctor
+
         private ConvexPolygon(Point[] points)
         {
             var leftPoint = points.OrderBy(p => p.X).ThenByDescending(p => p.Y).First();
 
-            var sorted = points.Except(new []{ leftPoint }).OrderByDescending(p =>
+            var sorted = points.Except(new[] { leftPoint }).OrderByDescending(p =>
             {
                 var dy = p.Y - leftPoint.Y;
                 var dx = p.X - leftPoint.X;
-                var L = Math.Sqrt(dx*dx + dy*dy);
+                var L = Math.Sqrt(dx * dx + dy * dy);
                 var sin = dy / L;
 
                 return sin;
             });
 
-            Points = Enumerable.Concat(new [] { leftPoint }, sorted).ToArray();
+            Points = Enumerable.Concat(new[] { leftPoint }, sorted).ToArray();
 
             Area = CalculateArea();
             BorderSegments = InitBorderLines();
@@ -47,6 +49,8 @@ namespace AreaCalculator.Calculation.Shapes
             }
             return new ConvexPolygon(points);
         }
+
+        #endregion
 
         #region Public properties
 
