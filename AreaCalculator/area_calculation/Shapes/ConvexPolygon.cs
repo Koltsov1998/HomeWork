@@ -7,6 +7,8 @@ namespace AreaCalculator.Calculation.Shapes
 {
     public class ConvexPolygon : IPlaneShape
     {
+        private const double tol = 10e-1;
+
         private ConvexPolygon(Point[] points)
         {
             var leftPoint = points.OrderBy(p => p.X).ThenByDescending(p => p.Y).First();
@@ -56,21 +58,21 @@ namespace AreaCalculator.Calculation.Shapes
 
             var centralPoint = new Point(centralPointX, centralPointY);
 
-            var result = BorderSegments.Select(s => s.UnderlyingLine).All(l => l >= centralPoint == l >= point);
+            var result = BorderSegments.Select(s => s.UnderlyingLine).All(l => l > centralPoint == l > point);
 
             return result;
         }
 
         public override int GetHashCode()
         {
-            var result = Points.Average(p => (p.X + p.Y)).GetHashCode();
-
-            return result;
+            return (int)Area;
         }
 
         public override bool Equals(object obj)
         {
-            return this.GetHashCode() == obj.GetHashCode();
+            var other = (ConvexPolygon) obj;
+
+            return this.Points.All(_ => other.Points.Any(p => Math.Abs(p.X - _.X) < tol && Math.Abs(p.Y - _.Y) < tol));
         }
 
         #endregion

@@ -31,14 +31,14 @@ namespace AreaCalculator.Calculation.Lines
             return A * point.X + B * point.Y + C == 0;
         }
 
-        public static bool operator >=(Line line, Point point)
+        public static bool operator >(Line line, Point point)
         {
-            return line.A * point.X + line.B * point.Y + line.C >= 0;
+            return line.A * point.X + line.B * point.Y + line.C > 0;
         }
 
-        public static bool operator <=(Line line, Point point)
+        public static bool operator <(Line line, Point point)
         {
-            return line.A * point.X + line.B * point.Y + line.C <= 0;
+            return line.A * point.X + line.B * point.Y + line.C < 0;
         }
 
         #endregion
