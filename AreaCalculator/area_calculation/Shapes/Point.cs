@@ -20,5 +20,19 @@ namespace AreaCalculator.Calculation.Shapes
         {
             return new Point(point.X - vector.X, point.Y - vector.Y);
         }
+
+        /// <inheritdoc />
+        public override int GetHashCode()
+        {
+            return X.GetHashCode() - Y.GetHashCode();
+        }
+
+        /// <inheritdoc />
+        public override bool Equals(object obj)
+        {
+            var other = (Point) obj;
+
+            return this.X == other.X && this.Y == other.Y;
+        }
     }
 }

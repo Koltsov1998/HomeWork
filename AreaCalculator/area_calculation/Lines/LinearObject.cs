@@ -2,9 +2,9 @@
 
 namespace AreaCalculator.Calculation.Lines
 {
-    public class ThickLine : Line
+    public class LinearObject : Line
     {
-        public ThickLine(double w, double a, double b, double c) : base(a, b, c)
+        public LinearObject(double w, double a, double b, double c) : base(a, b, c)
         {
             W = w;
         }

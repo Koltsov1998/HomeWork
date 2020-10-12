@@ -1,4 +1,5 @@
-﻿using AreaCalculator.Calculation.Shapes;
+﻿using System;
+using AreaCalculator.Calculation.Shapes;
 
 namespace AreaCalculator.Calculation.Lines
 {
@@ -28,7 +29,7 @@ namespace AreaCalculator.Calculation.Lines
 
         public bool LiesOnPoint(Point point)
         {
-            return A * point.X + B * point.Y + C == 0;
+            return Math.Abs(A * point.X + B * point.Y + C) < 10e-7;
         }
 
         public static bool operator >(Line line, Point point)
@@ -39,6 +40,16 @@ namespace AreaCalculator.Calculation.Lines
         public static bool operator <(Line line, Point point)
         {
             return line.A * point.X + line.B * point.Y + line.C < 0;
+        }
+
+        public static bool operator >=(Line line, Point point)
+        {
+            return line.A * point.X + line.B * point.Y + line.C >= 0;
+        }
+
+        public static bool operator <=(Line line, Point point)
+        {
+            return line.A * point.X + line.B * point.Y + line.C <= 0;
         }
 
         #endregion

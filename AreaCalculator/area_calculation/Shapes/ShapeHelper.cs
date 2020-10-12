@@ -1,24 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using AreaCalculator.Calculation.Lines;
 
 namespace AreaCalculator.Calculation.Shapes
 {
     public static class ShapeHelper
     {
-        public static IPlaneShape BuildThickLineRectangle(Line firstLine, Line secondLine, Segment[] areaBorders)
+        public static ConvexPolygon BuildThickLineRectangle(ConvexPolygon boundaryArea, LinearObject linearObject)
         {
-            var points1 = areaBorders.Select(b => LineHelper.FindLinesIntersection(b, firstLine)).Where(p => p != null).ToArray();
-            var points2 = areaBorders.Select(b => LineHelper.FindLinesIntersection(b, secondLine)).Where(p => p != null).ToArray();
+            var (firstLine, secondLine) = linearObject.GetBorderLines();
 
-            var intersectionPoints = Enumerable.Concat(points1, points2);
+            var points1 = boundaryArea.BorderSegments.Select(b => LineHelper.FindLinesIntersection(b, firstLine)).Where(p => p != null).ToArray();
+            var points2 = boundaryArea.BorderSegments.Select(b => LineHelper.FindLinesIntersection(b, secondLine)).Where(p => p != null).ToArray();
 
-            if (intersectionPoints.Count() != 4)
-            {
-                throw  new ArgumentException("Area borders has wrong configuration");
-            }
+            var innerPoints = boundaryArea.Points.Where(p => firstLine > p == secondLine < p);
+
+            var intersectionPoints = points1
+                .Concat(points2)
+                .Concat(innerPoints);
 
             var infrastractureArea = ConvexPolygon.Create(intersectionPoints);
 
@@ -27,7 +26,7 @@ namespace AreaCalculator.Calculation.Shapes
 
         public static ConvexPolygon FindShapesIntersection(ConvexPolygon shape1, ConvexPolygon shape2)
         {
-            List<Point> intersectionPoints = new List<Point>();
+            HashSet<Point> intersectionPoints = new HashSet<Point>();
 
             foreach (var shape1BorderSegment in shape1.BorderSegments)
             {
@@ -41,11 +40,13 @@ namespace AreaCalculator.Calculation.Shapes
                 }
             }
 
-            // adding points of figure that are lying inside another figure
-            intersectionPoints.AddRange(shape1.Points.Where(p => shape2.PointLiesInside(p)));
-            intersectionPoints.AddRange(shape2.Points.Where(p => shape1.PointLiesInside(p)));
+            var result = new List<Point>(intersectionPoints);
 
-            return ConvexPolygon.Create(intersectionPoints);
+            // adding points of figure that are lying inside another figure
+            result.AddRange(shape1.Points.Where(p => shape2.PointLiesStrictlyInside(p)));
+            result.AddRange(shape2.Points.Where(p => shape1.PointLiesStrictlyInside(p)));
+
+            return ConvexPolygon.Create(result);
         }
     }
 }

@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30517.126
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "area_calculation", "area_calculation\area_calculation.csproj", "{7F749F1C-1E1F-4346-A935-79A8A4F98576}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "area_calculation", "area_calculation\area_calculation.csproj", "{7F749F1C-1E1F-4346-A935-79A8A4F98576}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "area_calculation_tests", "area_calculation_tests\area_calculation_tests.csproj", "{6D0B4AC5-B170-44AE-BA65-939638409B5F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "area_calculation_tests", "area_calculation_tests\area_calculation_tests.csproj", "{6D0B4AC5-B170-44AE-BA65-939638409B5F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "area_calculator_cli", "area_calculator_cli\area_calculator_cli.csproj", "{39231A04-A2EB-4DB8-B5BB-87F2BB3956D8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{6D0B4AC5-B170-44AE-BA65-939638409B5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6D0B4AC5-B170-44AE-BA65-939638409B5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6D0B4AC5-B170-44AE-BA65-939638409B5F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39231A04-A2EB-4DB8-B5BB-87F2BB3956D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39231A04-A2EB-4DB8-B5BB-87F2BB3956D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39231A04-A2EB-4DB8-B5BB-87F2BB3956D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39231A04-A2EB-4DB8-B5BB-87F2BB3956D8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

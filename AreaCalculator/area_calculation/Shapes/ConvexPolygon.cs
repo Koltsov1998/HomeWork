@@ -5,7 +5,7 @@ using AreaCalculator.Calculation.Lines;
 
 namespace AreaCalculator.Calculation.Shapes
 {
-    public class ConvexPolygon : IPlaneShape
+    public class ConvexPolygon
     {
         private const double tol = 10e-1;
 
@@ -31,11 +31,20 @@ namespace AreaCalculator.Calculation.Shapes
 
         public static ConvexPolygon Create(IEnumerable<Point> points)
         {
+            if (points.Count() < 3)
+            {
+                return null;
+            }
+
             return new ConvexPolygon(points.ToArray());
         }
 
         public static ConvexPolygon Create(params Point[] points)
         {
+            if (points.Length < 3)
+            {
+                return null;
+            }
             return new ConvexPolygon(points);
         }
 
@@ -51,7 +60,12 @@ namespace AreaCalculator.Calculation.Shapes
 
         #region Public methods
 
-        public bool PointLiesInside(Point point)
+        public bool IsInsideAnotherCp(ConvexPolygon anotherCp)
+        {
+            return this.Points.All(anotherCp.PointLiesInside);
+        }
+
+        public bool PointLiesStrictlyInside(Point point)
         {
             var centralPointX = Points.Average(p => p.X);
             var centralPointY = Points.Average(p => p.Y);
@@ -59,6 +73,18 @@ namespace AreaCalculator.Calculation.Shapes
             var centralPoint = new Point(centralPointX, centralPointY);
 
             var result = BorderSegments.Select(s => s.UnderlyingLine).All(l => l > centralPoint == l > point);
+
+            return result;
+        }
+
+        public bool PointLiesInside(Point point)
+        {
+            var centralPointX = Points.Average(p => p.X);
+            var centralPointY = Points.Average(p => p.Y);
+
+            var centralPoint = new Point(centralPointX, centralPointY);
+
+            var result = BorderSegments.Select(s => s.UnderlyingLine).All(l => l >= centralPoint == l >= point);
 
             return result;
         }

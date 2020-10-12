@@ -34,7 +34,7 @@ namespace AreaCalculator.Calculation.Lines
 
         #region Public methods
 
-        public bool LiesOnPoint(Point point)
+        public bool PointBelongsToSegment(Point point)
         {
             var result = UnderlyingLine.LiesOnPoint(point)
                    && point.X <= _maxX && point.X >= _minX
@@ -71,6 +71,5 @@ namespace AreaCalculator.Calculation.Lines
         }
 
         #endregion
-
     }
 }

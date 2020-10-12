@@ -39,7 +39,7 @@ namespace AreaCalculator.Calculation.Lines
                 return null;
             }
 
-            return segment.LiesOnPoint(intersectionPoint) ? intersectionPoint : null;
+            return segment.PointBelongsToSegment(intersectionPoint) ? intersectionPoint : null;
         }
 
         public static Point FindLinesIntersection(Segment segment1, Segment segment2)
@@ -51,7 +51,7 @@ namespace AreaCalculator.Calculation.Lines
                 return null;
             }
 
-            return segment1.LiesOnPoint(intersectionPoint) && segment2.LiesOnPoint(intersectionPoint) ? intersectionPoint : null;
+            return segment1.PointBelongsToSegment(intersectionPoint) && segment2.PointBelongsToSegment(intersectionPoint) ? intersectionPoint : null;
         }
     }
 }
