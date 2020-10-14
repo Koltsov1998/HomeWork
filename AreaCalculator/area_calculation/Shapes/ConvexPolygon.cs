@@ -116,19 +116,14 @@ namespace AreaCalculator.Calculation.Shapes
         {
             double square = 0;
 
-            var firstPoint = Points.First();
-
-            // shape must have start at (0, 0), i.e. one of its points has to be there
-            var normalizedPoints = Points.Select(p => p - new Vector(firstPoint)).ToArray();
-
-            for (int i = 1; i < normalizedPoints.Length; i++)
+            for (int i = 0; i < Points.Length; i++)
             {
-                var currentPoint = normalizedPoints[i];
-                var nextPoint = i == normalizedPoints.Length - 1 ? normalizedPoints[0] : normalizedPoints[i + 1];
+                var currentPoint = Points[i];
+                var nextPoint = i == Points.Length - 1 ? Points[0] : Points[i + 1];
                 square += (currentPoint.X + nextPoint.X) * (currentPoint.Y - nextPoint.Y);
             }
 
-            square /= 2;
+            square = Math.Abs(square) / 2;
 
             return square;
         }

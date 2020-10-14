@@ -105,7 +105,7 @@ namespace AreaCalculator.Calculation.Tests
 
             var intersectionShape = PolygonHelper.FindShapesIntersection(shape1, shape2);
 
-            Assert.Equal(null, intersectionShape);
+            Assert.Null(intersectionShape);
         }
 
         [Fact]

@@ -9,7 +9,7 @@ namespace AreaCalculator.Calculation.Tests
 {
     public class SolutionTests
     {
-        private const double _tol = 10e-1;
+        private const double _tol = 10e-4;
 
         [Fact]
         public void TestSimpleAreaEvaluation()
@@ -211,7 +211,44 @@ namespace AreaCalculator.Calculation.Tests
             outputReader.ReadLine();
 
             var area = double.Parse(outputReader.ReadLine());
-            Assert.True(Math.Abs(31.2 - area) < _tol);
+            Assert.True(Math.Abs(31.2279 - area) < _tol);
+        }
+
+        [Fact]
+        public void TestStreamInput3()
+        {
+            var inputStream = new MemoryStream();
+            var outputStream = new MemoryStream();
+
+            StreamWriter inputWriter = new StreamWriter(inputStream);
+            StreamReader outputReader = new StreamReader(outputStream);
+
+            var streamReader = new StreamReader(inputStream);
+            var streamWriter = new StreamWriter(outputStream);
+
+            var inputProcessor = new InputTextProcessor(streamReader, streamWriter);
+
+            inputWriter.WriteLine("2");
+            inputWriter.WriteLine("0 0 0 10 5 11 10 10 10 0");
+            inputWriter.WriteLine("1");
+            inputWriter.WriteLine("6 0 1 -8");
+
+            inputWriter.Flush();
+
+            inputStream.Position = 0;
+
+            inputProcessor.ProcessInput();
+
+            outputStream.Position = 0;
+
+            outputReader.ReadLine();
+            outputReader.ReadLine();
+            outputReader.ReadLine();
+            outputReader.ReadLine();
+            outputReader.ReadLine();
+
+            var area = double.Parse(outputReader.ReadLine());
+            Assert.True(Math.Abs(55 - area) < _tol);
         }
     }
 }
