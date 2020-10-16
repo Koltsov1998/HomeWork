@@ -25,6 +25,22 @@ namespace AreaCalculator.Calculation.Tests
         }
 
         [Fact]
+        public void TestPointedShapeEvaluation2()
+        {
+            var shape = ConvexPolygon.Create(
+                new Point(0, 4),
+                new Point(4, 4),
+                new Point(6, 0),
+                new Point(6, 0),
+                new Point(6, 0),
+                new Point(4, -4),
+                new Point(0, -4)
+            );
+
+            Assert.True(Math.Abs(shape.Area - 40) < _tolearance);
+        }
+
+        [Fact]
         public void TestBodrerLinesEvalueation()
         {
             var thickLine = new LinearObject(2, 1, 0, 0);
